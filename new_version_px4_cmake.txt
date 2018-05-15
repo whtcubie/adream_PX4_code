@@ -24,7 +24,6 @@ Pixhawk 1: make px4fmu-v2_default
 Pixhawk 2: make px4fmu-v3_default
 
 
-
 重新编译：
 1. make clean
 2. make px4fmu-v3_default
