@@ -1,0 +1,23 @@
+
+Ubuntu Linux:
+1. 打开控制台:
+sudo apt-get install screen
+串行: Pixhawk v1 使用 57600 波特率
+ls /dev/tty*，观察终端页面发生了什么样的变化，那个变化（少掉）的名称就是系统的串口). 
+在编者的机器上少了/dev/ttyUSB0，说明串口设备的正确串口是/dev/ttyUSB0）。找到正确的串口后，重新连接串口设备。
+
+2. screen /dev/ttyUSB0 57600 8N1，然后输入enter,出现nsh> 说明打开控制台成功。
+ 
+
+Windows:PuTTY
+下载 PuTTY 并启动它.
+
+然后选择“串行连接”，然后设置端口参数：
+57600 baud
+8 data bits
+1 stop bit
+
+
+
+
+

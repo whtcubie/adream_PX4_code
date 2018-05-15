@@ -1,0 +1,52 @@
+
+官网有关激光测距模块的介绍教程：
+https://docs.px4.io/en/sensor/rangefinders.html
+https://pixhawk.org/peripherals/rangefinder
+
+
+雷达数据使用：
+Rangefinder Configuration
+
+Setup
+
+The rangefinder is configured using EKF2_RNG_* parameters. These configure information about the offset of the rangefinder from the centre of the vehicle body, the approximate delay of data reaching the estimator from the sensor, etc.
+
+
+Enable/Use
+
+The rangefinder can be enabled in two ways:
+
+Set EKF2_HGT_MODE to Range finder (2). This makes the rangefinder the primary source of height estimation (the default altitude sensor is the barometer).
+Set EKF2_RNG_AID to 1. This makes the vehicle use the rangefinder as the primary source when it is safe to use, but will otherwise use the sensor specified in EKF2_HGT_MODE.
+Specifically, the rangefinder is enabled when:
+velocity < EKF2_RNG_A_VMAX
+distance to ground < EKF2_RNG_A_HMAX
+Other parameters affecting "Range aid" are prefixed with EKF2\_RNG\_A\_.
+
+
+设置：
+https://docs.px4.io/en/advanced_config/parameter_reference.html#EKF2_RNG_POS_X
+EKF2_RNG_POS_X  车体内测距仪的X位置 
+EKF2_RNG_POS_Y  车体内测距仪的Y位置 
+EKF2_RNG_POS_Z  车体内测距仪的Z位置 
+EKF2_RNG_SFE    测距仪测距噪声定标器
+
+
+使能/使用
+Firmware/src/modules/ekf2/ekf2_params.c  
+1. set EKF2_HGT_MODE to 2
+   line 568 PARAM_DEFINE_INT32(EKF2_HGT_MODE, 2);
+2. set EKF2_RNG_AID to 1 
+   line 1021 PARAM_DEFINE_INT32(EKF2_RNG_AID, 1);
+
+Specifically, the rangefinder is enabled when:
+
+	velocity < EKF2_RNG_A_VMAX
+	distance to ground < EKF2_RNG_A_HMAX
+
+comment:
+1.中设置ranger 作为指定传感器主要高度源
+2.中使能ranger 作为高度源
+
+如何使用ecl EKF?
+将SYS_MC_EST_GROUP参数设置为2可使用ecl EKF.
