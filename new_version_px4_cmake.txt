@@ -1,0 +1,31 @@
+国内csdn教程链接：
+https://blog.csdn.net/egean/article/details/79016768
+
+开始编译
+make px4fmu-v2_default
+
+报错：
+CMake Error at platforms/nuttx/NuttX/CMakeLists.txt:113 (add_dependencies):
+add_dependencies Cannot add target-level dependencies to INTERFACE library
+target "nuttx_build".
+
+1.解决办法：cmake --version 查看cmake版本 3.3版本以下会报错
+  官网下载安装https://cmake.org/download/，cmake编译软件
+
+
+
+报错：
+Board can accept larger flash images (2M bytes) than board config (1M bytes). Please use the correct board configuration to avoid lacking critical functionality.
+
+区别：
+The main difference is that it is based on the Pixhawk-project FMUv3 open hardware design, which corrects a bug that limited the original Pixhawk 1 to 1MB of flash.
+
+Pixhawk 1: make px4fmu-v2_default
+Pixhawk 2: make px4fmu-v3_default
+
+
+
+重新编译：
+1. make clean
+2. make px4fmu-v3_default
+3. make px4fmu-v3_default upload
