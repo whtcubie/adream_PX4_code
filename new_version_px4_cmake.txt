@@ -28,3 +28,30 @@ Pixhawk 2: make px4fmu-v3_default
 1. make clean
 2. make px4fmu-v3_default
 3. make px4fmu-v3_default upload
+
+编译v1.7.3版本的固件的问题
+relaybot@ubuntu:/work/stable/Firmware$ make px4fmu-v2_default upload 
+[1/1] uploading
+/work/stable/Firmware/build/px4fmu-v2_default/px4fmu-v2_default.px4
+Loaded firmware for 9,0, size: 1029149 bytes, waiting for the bootloader...
+If the board does not respond within 1-2 seconds, unplug and re-plug the USB
+connector.
+Found board 9,0 bootloader rev 4 on
+/dev/serial/by-id/usb-3D_Robotics_PX4_BL_FMU_v2.x_0-if00
+
+Board can accept larger flash images (2080768 bytes) than board config
+(1032192 bytes). Please use the correct board configuration to avoid lacking
+critical functionality.
+
+用旧版本1.6.5版本代替下载脚本即可：
+Tools/px_uploader.py 删除即可
+if self.fw_maxsize < fw.property('image_maxsize'):
+	raise RuntimeError("Board can accept larger flash
+			images (%u bytes) than board config (%u bytes). Please
+			use the correct board configuration to avoid lacking
+			critical functionality."
+			% (self.fw_maxsize,
+				% fw.property('image_maxsize')))
+
+
+
